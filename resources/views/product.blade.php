@@ -7,7 +7,7 @@
       <!-- Image gallery -->
       <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
         <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-          <img src="{{ $product['url_1'] }}" alt="Two each of gray, white, and black shirts laying flat." class="h-full w-full object-cover object-center">
+          <img src="{{ $product['picture'] }}" alt="Two each of gray, white, and black shirts laying flat." class="h-full w-full object-cover object-center">
         </div>
       </div>
   

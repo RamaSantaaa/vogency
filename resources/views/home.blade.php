@@ -58,7 +58,7 @@
           @foreach($recommendations as $recommendation)
             <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
               <!-- Menampilkan Gambar Produk -->
-              <img src="{{ asset('images/' . $recommendation->product->image) }}" class="w-full h-64 object-cover" alt="{{ $recommendation->product->item_purchased }}">
+              <img src="{{$recommendation->product->picture}}" class="w-full h-64 object-cover" alt="{{ $recommendation->product->item_purchased }}">
     
               <div class="p-4">
                 <h5 class="text-xl font-semibold text-gray-900">{{ $recommendation->product->item_purchased }}</h5>

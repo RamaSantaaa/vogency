@@ -19,6 +19,7 @@ class ProductSeeder extends Seeder
                 'price' => 400000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => 'https://media.istockphoto.com/id/163208487/photo/male-coat-isolated-on-the-white.jpg?s=612x612&w=0&k=20&c=3Sdq5xnVS2jOYPNXI6JLwAumzyelcP_VgKVW0MVUhwo=',
             ],
             [
                 'item_purchased' => 'T-shirt',
@@ -28,6 +29,7 @@ class ProductSeeder extends Seeder
                 'price' => 90000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Boots',
@@ -37,6 +39,7 @@ class ProductSeeder extends Seeder
                 'price' => 300000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Sandals',
@@ -46,6 +49,7 @@ class ProductSeeder extends Seeder
                 'price' => 110000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Sunglasses',
@@ -55,6 +59,7 @@ class ProductSeeder extends Seeder
                 'price' => 80000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
 
             // Produk untuk Perempuan
@@ -66,6 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 450000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Dress',
@@ -75,6 +81,7 @@ class ProductSeeder extends Seeder
                 'price' => 150000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Heels',
@@ -84,6 +91,7 @@ class ProductSeeder extends Seeder
                 'price' => 250000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Flats',
@@ -93,6 +101,7 @@ class ProductSeeder extends Seeder
                 'price' => 130000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
             [
                 'item_purchased' => 'Hat',
@@ -102,6 +111,7 @@ class ProductSeeder extends Seeder
                 'price' => 70000,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'picture' => '...',
             ],
         ]);
     }

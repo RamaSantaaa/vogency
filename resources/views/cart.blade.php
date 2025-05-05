@@ -34,7 +34,7 @@
               <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
                   <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                       <a href="/products/{{ $item->product->slug }}" class="shrink-0 md:order-1">
-                          <img class="h-20 w-20" src="{{ $item->product->url }}" alt="{{ $item->product->item_purchased }} image" />
+                          <img class="h-20 w-20" src="{{ $item->product->picture }}" alt="{{ $item->product->item_purchased }} image" />
                       </a>
   
                       <div class="flex items-center justify-between md:order-3 md:justify-end">
@@ -138,30 +138,30 @@
                       <div class="space-y-2">
                           <dl class="flex items-center justify-between gap-4">
                               <dt class="text-base font-normal text-gray-500">Original Price</dt>
-                              <dd class="text-base font-medium text-gray-900">{{ '$'.number_format($subtotal, 2) }}</dd>
+                              <dd class="text-base font-medium text-gray-900">{{ 'Rp'.number_format($subtotal, 2) }}</dd>
                           </dl>
                   
                           <dl class="flex items-center justify-between gap-4">
                               <dt class="text-base font-normal text-gray-500">Discount</dt>
-                              <dd class="text-base font-medium text-red-600">{{ '-$'.number_format($discount, 2) }}</dd>
+                              <dd class="text-base font-medium text-red-600">{{ '-Rp'.number_format($discount, 2) }}</dd>
                           </dl>
                   
                           @if ($storePickupFee > 0)
                           <dl class="flex items-center justify-between gap-4">
                               <dt class="text-base font-normal text-gray-500">Store Pickup</dt>
-                              <dd class="text-base font-medium text-gray-900">{{ '$'.$storePickupFee }}</dd>
+                              <dd class="text-base font-medium text-gray-900">{{ 'Rp'.$storePickupFee }}</dd>
                           </dl>
                           @endif
                   
                           <dl class="flex items-center justify-between gap-4">
                               <dt class="text-base font-normal text-gray-500">Tax (11%)</dt>
-                              <dd class="text-base font-medium text-gray-900">{{ '$'.number_format($tax, 2) }}</dd>
+                              <dd class="text-base font-medium text-gray-900">{{ 'Rp'.number_format($tax, 2) }}</dd>
                           </dl>
                       </div>
                   
                       <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
                           <dt class="text-base font-bold text-gray-900">Total</dt>
-                          <dd class="text-base font-bold text-gray-900">{{ '$'.number_format($total, 2) }}</dd>
+                          <dd class="text-base font-bold text-gray-900">{{ 'Rp'.number_format($total, 2) }}</dd>
                       </dl>
                   </div>
                   

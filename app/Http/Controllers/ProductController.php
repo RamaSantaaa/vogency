@@ -25,7 +25,7 @@ class ProductController extends Controller
         $products = Product::where('gender', 'Male')->get(); // Mengambil semua produk dengan category laki laki
 
         return view('men', [
-            'title' => "Men's Shoes",
+            'title' => "Men's Stuff",
             'user' => $user,
             'products' => $products
         ]);
@@ -34,10 +34,10 @@ class ProductController extends Controller
     public function showWomanProducts()
     {
         $user = auth()->user(); // Mengambil user yang sedang login
-        $products = Product::where('gender', 'Female')->get();// Mengambil semua produk dengan category perempuan
+        $products = Product::where('gender', 'Female')->get(); // Mengambil semua produk dengan category perempuan
 
         return view('woman', [
-            'title' => "Woman's Shoes",
+            'title' => "Woman's Stuff",
             'user' => $user,
             'products' => $products
         ]);

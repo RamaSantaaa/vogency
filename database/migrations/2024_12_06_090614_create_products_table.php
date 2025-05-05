@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('season');
             $table->string('gender');
             $table->decimal('price', 10, 2);
+            $table->string('picture');
             $table->timestamps();
         });
     }

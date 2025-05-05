@@ -16,10 +16,9 @@ class HomeController extends Controller
       ->latest() // Urutkan berdasarkan created_at terbaru
       ->first(); // Ambil hanya pembelian terbaru
 
-
     // 2. Jika user belum pernah membeli produk apapun
     if (!$purchase) {
-      return view('recommendations', ['recommendations' => []]);
+      return view('home', ['recommendations' =>  [], 'title' => 'Home', 'user' => $user]);
     }
 
     // 3. Ambil produk yang dibeli pada pembelian terbaru

@@ -29,7 +29,7 @@ class ProductSeeder extends Seeder
                 'price' => 90000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://isto.pt/cdn/shop/files/Classic_T-shirt_Black_1_4b42b483-c2cf-46f6-805c-90bd905b4338.webp?v=1742902194',
             ],
             [
                 'item_purchased' => 'Boots',
@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'price' => 300000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://testrunnercom.b-cdn.net/wp-content/uploads/2024/10/asics-novablast-5-01.jpg',
             ],
             [
                 'item_purchased' => 'Sandals',
@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
                 'price' => 110000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/c3de3a40507e48a0aad7a80e010fbb08_9366/adilette-comfort-slides.jpg',
             ],
             [
                 'item_purchased' => 'Sunglasses',
@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
                 'price' => 80000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://images.evo.com/imgp/700/225779/914406/oakley-sutro-lite-sweep-sunglasses-.jpg',
             ],
 
             // Produk untuk Perempuan
@@ -71,7 +71,7 @@ class ProductSeeder extends Seeder
                 'price' => 450000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://www.danezon.com/wp-content/uploads/2020/07/Mens-Brown-Mid-Length-Wool-Coat.jpg',
             ],
             [
                 'item_purchased' => 'Dress',
@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
                 'price' => 150000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://ae01.alicdn.com/kf/HTB1ig.EJrSYBuNjSspfq6AZCpXa1/Gamiss-Audrey-Hepburn-Vintage-Party-Dress-Women-Floral-Flare-Midi-Dresses-Winter-Spring-Retro-Elegant-Dress.jpg',
             ],
             [
                 'item_purchased' => 'Heels',
@@ -91,7 +91,7 @@ class ProductSeeder extends Seeder
                 'price' => 250000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://i.pinimg.com/originals/c4/9a/b9/c49ab9737bff03516240b6819ff8801d.jpg',
             ],
             [
                 'item_purchased' => 'Flats',
@@ -101,7 +101,7 @@ class ProductSeeder extends Seeder
                 'price' => 130000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://th.bing.com/th/id/OIP.seaUem4L_n4m8aX8QkE1SQHaHa?rs=1&pid=ImgDetMain',
             ],
             [
                 'item_purchased' => 'Hat',
@@ -111,7 +111,7 @@ class ProductSeeder extends Seeder
                 'price' => 70000,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'picture' => '...',
+                'picture' => 'https://th.bing.com/th/id/OIP.siiH7qJCK7ReXnjGa-upLgHaF7?rs=1&pid=ImgDetMain',
             ],
         ]);
     }

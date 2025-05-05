@@ -53,7 +53,6 @@
 
     <div class="container mt-5 mx-auto">
       <h1 class="text-center text-3xl font-semibold mb-8">Rekomendasi Produk</h1>
-    
       @if(count($recommendations) > 0)
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           @foreach($recommendations as $recommendation)

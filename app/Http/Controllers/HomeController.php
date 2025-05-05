@@ -11,77 +11,121 @@ class HomeController extends Controller
   public function showHome()
   {
     $user = auth()->user();
-    // 1. Ambil riwayat pembelian terbaru untuk pengguna dengan userId tertentu
+    // 1. Ambil pembelian terbaru oleh user dengan ID tertentu
     $purchase = Purchase::where('user_id', $user->id)
-      ->orderBy('id', 'desc')  // Mengurutkan berdasarkan ID secara menurun
-      ->first(); // Ambil data yang pertama, yang berarti data dengan ID terbesar
+      ->latest() // Urutkan berdasarkan created_at terbaru
+      ->first(); // Ambil hanya pembelian terbaru
 
 
-    // 2. Jika tidak ada data pembelian untuk user tersebut
+    // 2. Jika user belum pernah membeli produk apapun
     if (!$purchase) {
-      return view('home', ['title' => 'Home', 'user' => $user, 'recommendations' => []]);
+      return view('recommendations', ['recommendations' => []]);
     }
 
-    // Ambil produk dari pembelian terbaru
-    $product = $purchase->product; // Ambil data produk dari pembelian terbaru
+    // 3. Ambil produk yang dibeli pada pembelian terbaru
+    $product = $purchase->product;
 
+    // 4. Ambil semua produk lain (kecuali yang sudah dibeli tadi)
+    $recommendedProducts = Product::where('id', '!=', $product->id)->get();
 
-
-    // 3. Cari produk yang relevan berdasarkan kategori, musim, gender
-    // 4. Bandingkan dengan produk lain, pastikan tidak merekomendasikan produk yang sama
-    $recommendedProducts = Product::where('id', '!=', $product->id) // Pastikan tidak mengambil produk yang sama dengan $product
-      ->get();
-
-
-    // Debugging: Lihat produk yang relevan ditemukan
-    //dd($recommendedProducts);  // Ini akan menampilkan produk yang relevan
-
-    // 5. Rekomendasi produk berdasarkan kriteria kesamaan
+    // 5. Siapkan koleksi untuk menampung produk rekomendasi
     $recommendations = collect();
 
-    // Loop untuk mencari rekomendasi produk yang relevan
+    // 6. Ambil vektor atribut dari produk yang dibeli
+    $productVector = $this->getProductVector($product);
+
+    // 7. Loop semua produk lain untuk hitung similarity
     foreach ($recommendedProducts as $recommendedProduct) {
-      $score = $this->calculateSimilarityScore($product, $recommendedProduct);
+      // Ambil vektor produk lain
+      $recommendedProductVector = $this->getProductVector($recommendedProduct);
 
-      // Debug: Lihat skor kesamaan produk
-      //dump($recommendedProduct->item_purchased, $score);
+      // Hitung cosine similarity antara dua vektor produk
+      $similarity = $this->cosineSimilarity($productVector, $recommendedProductVector);
 
-      // Hanya masukkan produk jika skor lebih dari atau sama dengan 2
-      if ($score >= 2) {
-        // Tambahkan produk dengan skor kesamaan
-        $recommendations->push((object)[
-          'product' => $recommendedProduct,
-          'score' => $score
-        ]);
-      }
+      // 8. Masukkan semua produk dengan similarity ke koleksi
+      $recommendations->push((object)[
+        'product' => $recommendedProduct,
+        'similarity' => $similarity
+      ]);
     }
 
-    // 6. Urutkan rekomendasi berdasarkan skor kesamaan (tertinggi)
-    $recommendations = $recommendations->sortByDesc('score');
+    // 9. Urutkan rekomendasi berdasarkan similarity tertinggi
+    $recommendations = $recommendations->sortByDesc('similarity');
 
+    // 10. Kirim data ke view
     return view('home', ['title' => 'Home', 'user' => $user, 'recommendations' => $recommendations]);
   }
 
-  private function calculateSimilarityScore($product1, $product2)
+  // Fungsi untuk ubah atribut produk jadi vektor numerik
+  private function getProductVector($product)
   {
-    $score = 0;
+    return [
+      'category' => $this->categoryToVector($product->category), // Kategori produk
+      'season' => $this->seasonToVector($product->season),       // Musim
+      'gender' => $this->genderToVector($product->gender),       // Gender
+      'price' => $this->priceToVector($product->price)            // Harga
+    ];
+  }
 
-    // 1. Cek kesamaan kategori
-    if ($product1->category === $product2->category) {
-      $score++;
+  // Fungsi untuk hitung cosine similarity antar 2 vektor
+  private function cosineSimilarity($vectorA, $vectorB)
+  {
+    $dotProduct = 0;
+    $magnitudeA = 0;
+    $magnitudeB = 0;
+
+    // Hitung dot product dan magnitude vektor
+    foreach ($vectorA as $key => $value) {
+      $dotProduct += $value * $vectorB[$key];
+      $magnitudeA += pow($value, 2);
+      $magnitudeB += pow($vectorB[$key], 2);
     }
 
-    // 2. Cek kesamaan musim
-    if ($product1->season === $product2->season) {
-      $score++;
+    // Hitung besar panjang vektor
+    $magnitudeA = sqrt($magnitudeA);
+    $magnitudeB = sqrt($magnitudeB);
+
+    // Cegah pembagian nol
+    if ($magnitudeA == 0 || $magnitudeB == 0) {
+      return 0;
     }
 
-    // 3. Cek kesamaan gender
-    if ($product1->gender === $product2->gender) {
-      $score++;
-    }
+    // Hasil akhir cosine similarity
+    return $dotProduct / ($magnitudeA * $magnitudeB);
+  }
 
-    // Kembalikan skor
-    return $score;
+  // Ubah nama kategori jadi nilai numerik
+  private function categoryToVector($category)
+  {
+    // Menambahkan kategori yang relevan
+    $categories = [
+      'Clothing' => 1,
+      'Footwear' => 2,
+      'Outerwear' => 3,
+      'Accessories' => 4
+    ];
+    return $categories[$category] ?? 0; // Default 0 jika kategori tidak dikenali
+  }
+
+  // Ubah musim ke nilai numerik
+  private function seasonToVector($season)
+  {
+    // Hanya dua musim yang ada: Winter dan Summer
+    $seasons = [
+      'Summer' => 1, // Musim panas
+      'Winter' => 2  // Musim dingin
+    ];
+    return $seasons[$season] ?? 0; // Default 0 jika musim tidak dikenali
+  }
+
+  // Ubah gender ke nilai numerik
+  private function genderToVector($gender)
+  {
+    return $gender === 'Male' ? 1 : 0; // 1 untuk Male, 0 untuk Female
+  }
+
+  private function priceToVector($price)
+  {
+    return floor($price / 1000); // Membagi harga dengan 1000 dan menghilangkan tiga nol terakhir
   }
 }

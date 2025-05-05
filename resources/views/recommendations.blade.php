@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="text-center mb-4">Rekomendasi Produk</h1>
-
+    {{ ($recommendations) }}
     @if(count($recommendations) > 0)
         <div class="row">
             @foreach($recommendations as $recommendation)
